@@ -45,9 +45,8 @@ NewNoteButton.addEventListener("click", () => {
   NoteTitleInput.value = "";
   NoteContentInput.value = "";
 
-  ModalButton.addEventListener("click", () => {
-    addNote();
-  });
+  ModalButton.removeEventListener("click", addNote);
+  ModalButton.addEventListener("click", addNote);
 });
 
 /**
@@ -189,11 +188,11 @@ function getNotes() {
     token: sessionStorage.getItem("token"),
   };
 
-  // Send an AJAX GET request to the specified URL with the data as a query parameter
+  // Send an AJAX POST request to the specified URL with the data as a query parameter
   // If the request is successful, log the response and call the "displayNotes" function with the parsed response data
   // If there is an error, log the error details and call the "handleResponse" function with the parsed error response
   $.ajax({
-    type: "GET",
+    type: "POST",
     url: Routes.DASHBOARD_API,
     data: "getNotes=" + JSON.stringify(data),
     success: function (response) {

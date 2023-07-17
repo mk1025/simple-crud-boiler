@@ -4,8 +4,8 @@ include_once "config.php";
 
 session_start();
 
-if (isset($_GET['getNotes'])) {
-    $receivedData = json_decode($_GET['getNotes']);
+if (isset($_POST['getNotes'])) {
+    $receivedData = json_decode($_POST['getNotes']);
 
     if (!isset($_SESSION['token'])) {
         http_response_code(403);
