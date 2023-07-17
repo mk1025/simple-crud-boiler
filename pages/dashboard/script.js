@@ -45,13 +45,7 @@ NewNoteButton.addEventListener("click", () => {
   NoteTitleInput.value = "";
   NoteContentInput.value = "";
 
-  const listeners = getEventListeners(ModalButton).click;
-  if (listeners) {
-    listeners.forEach((listener) => {
-      ModalButton.removeEventListener("click", listener.listener);
-    });
-  }
-  ModalButton.addEventListener("click", addNote);
+  ModalButton.onclick = () => addNote();
 });
 
 /**
@@ -67,16 +61,8 @@ function editNote(id, title, content) {
   // Set the title of the modal to "Edit Note"
   ModalTitle.innerText = "Edit Note";
 
-  // Remove any existing click event listeners from ModalButton
-  const listeners = getEventListeners(ModalButton).click;
-  if (listeners) {
-    listeners.forEach((listener) => {
-      ModalButton.removeEventListener("click", listener.listener);
-    });
-  }
-
   // Add a click event listener to ModalButton that calls the updateNote function with the given ID
-  ModalButton.addEventListener("click", () => updateNote(id));
+  ModalButton.onclick = () => updateNote(id);
 
   // Set the value of the NoteTitleInput to the new title
   NoteTitleInput.value = title;
